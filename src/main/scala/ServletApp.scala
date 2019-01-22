@@ -1,6 +1,6 @@
 /**
- * Macro Macro API
- * An API that provides access to recipe and ingredient information, both user-generated and sourced from the USDA
+ * The API
+ * An API that is an API
  *
  * OpenAPI spec version: 1.0.0
  * Contact: team@openapitools.org
@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  */
 
+
 package org.openapitools.app
 
 import org.scalatra.swagger.{ ApiInfo, SwaggerWithAuth, Swagger }
@@ -16,12 +17,19 @@ import org.scalatra.swagger.{ JacksonSwaggerBase, Swagger }
 import org.scalatra.ScalatraServlet
 import org.json4s.{ DefaultFormats, Formats }
 
+class ResourcesApp(implicit protected val swagger: OpenAPIApp)
+  extends ScalatraServlet with JacksonSwaggerBase {
+  before() {
+    response.headers += ("Access-Control-Allow-Origin" -> "*")
+  }
+}
+
 class OpenAPIApp extends Swagger(apiInfo = OpenAPIInfo.apiInfo, apiVersion = "1.0", swaggerVersion = Swagger.SpecVersion)
 
 object OpenAPIInfo {
   val apiInfo = ApiInfo(
-    """Macro Macro API""",
-    """An API that provides access to recipe and ingredient information, both user-generated and sourced from the USDA""",
+    """The API""",
+    """An API that is an API""",
     """http://org.openapitools""",
     """team@openapitools.org""",
     """All rights reserved""",
